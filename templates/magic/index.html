@@ -1,0 +1,22 @@
+<html>
+{% block header %}
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		{% block css %}{% endblock %}
+		{% block css2 %}{% endblock %}
+		{% block css3 %}{% endblock %}
+		
+		{% block js %}{% endblock %}
+		{% block js2 %}{% endblock %}
+		{% block js3 %}{% endblock %}
+	</head>
+{% endblock %}
+
+{% block body %}
+	<body>
+			<div class="nav">{% block nav %}{% endblock %}</div>
+			<div class="content">{% block content %}Magic Index{% endblock %}</div>
+			<div class="footer">{% block footer %}{% endblock %}</div>
+	</body>
+{% endblock %}
+</html>
