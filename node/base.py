@@ -22,17 +22,17 @@ class Node(object):
     
     @classmethod
     def render(cls, request, result):
-        '''argument: cls, request
-           return: result string
+        '''argument: result{'response':'html|ajax|redirect'}
+                     json: return {'response_type':'confirm|redirect|error|html', 'content':'...'}
+           return: ( html | json | redirect )
         '''
-        return render_to_response(cls.template, result, context_instance=RequestContext(request),)
-            
-    @staticmethod
-    def render_ajax(cls, request, result):
-        '''argument: cls, request
-           return: result json
-        '''
-        pass
+        if result['response_type'] == 'html':
+            return render_to_response(cls.template, result, context_instance=RequestContext(request),)
+        elif result['response'] == 'ajax':
+             pass
+        elif result['redirect'] == 'html': 
+            pass
+           
         
         
         

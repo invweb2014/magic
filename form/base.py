@@ -4,9 +4,10 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.contrib import messages
 from django.template import loader, Context
+from django.forms import ModelForm
 from magic.security.has_perm import has_perm
-
 from magic.node.base import Node
+from magic.db.item import ItemDb
 
 '''
     MEDIA_URL = '/xapp-htdocs/'
@@ -18,49 +19,43 @@ from magic.node.base import Node
     ImageResize.image_resize(image_path, image_path, 200, 300)    
 '''
 
-class MForm(Node):
+class BForm(Node):
     model = None
     template = "magic/ftable.html"
-    parent_template = None
+    parent_template = "magic/index.html"
     perm_list = []
-    
-    need_ownership = False
+    fownership = False
+    fupload = False
+      
+    tname = "My Form"
+    tsubmit = "Submit"
+    tclass = "my-form"
     
     @classmethod
-    @has_perm(['dummy',])
     def run(cls, request):
         '''argument: cls, request
            return: result dict
         '''
-        def instantiate_form(cls, request):
-            pass
-  
-        result = {}
         if request.method == 'GET': 
-            form = instantiate_form(cls, request) 
+            if cls.model and request.GET.get(id):
+                e = ItemDb.get(cls.model, {'id':request.GET.get(id)});
+                form = cls(instance=e)
+            else:
+                form = cls()
+            return {'form':form, 'response':'html'}
+        elif request.method == 'POST':
+            if cls.model:
+                e = ItemDb.get(cls.model, {'id':request.GET.get(id)});
+                form = cls(request.POST, request.FILES, instance=e)
+            else:
+                form = cls(request.POST)
             if form.is_valid(): 
-                result =  form.process(request)
-        elif request.method == 'POST': 
-            form = instantiate_form(cls, request)
-        return {'form':form, 'result':result}
-    
-    @classmethod
-    def render(cls, request, result):
-        '''argument: cls, request
-           return: result string
-           desc: doing the REDIRECT, AJAX, HTML RETURN HERE!!!
-        '''
-        return render_to_response(cls.template, result, context_instance=RequestContext(request),)
-            
-    @staticmethod
-    def render_ajax(cls, request, result):
-        '''argument: cls, request
-           return: result json
-        '''
-        pass
-    
+                return form.process(request)
+            return {'form':form, 'response':'html'}
+        
     #@post_after
     def process(self, request):
         self.save()
-        return cls.render(request, result)
+        result = {'response':'redirect', 'content':'/'}
+        return result
         

@@ -1,0 +1,36 @@
+{%  extends parent_template %}
+
+{% block content %}
+
+<form name="{{form.tclass}}" action="." method="POST" {% if form.fupload %}enctype="multipart/form-data"{%endif %} class="magic-form">
+    <h3>{{form.form_name}}</h3>
+    {% csrf_token %}  
+ 	<table>
+	    {% for field in form %}
+    		<tr>
+				<td><label>{{ field.label_tag|title }}</label></td>	
+	        	<td>{{ field|safe }}</td>
+	        	<td>
+	        		{% if form.is_post %}
+				        {% for error in field.errors %}
+					        <small class="error">
+								{{ error|escape }}<br/>
+					        </small>
+				        {% endfor %}
+			        {% endif %}
+			    </td>
+			</tr>
+		{% endfor %}
+    
+    	<tr>
+	    	<td></td>
+	    	<td> 
+	    		<input type="submit" value="{{form.tsubmit}}"></input>
+	    	</td>
+	    	<td>
+	    	</td>
+	    </tr>
+    </table>
+</form>
+
+{% endblock %}
