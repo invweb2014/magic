@@ -1,0 +1,6 @@
+{% for m in mdict.result %}
+	<div class="grid-item">
+			<a href="/g/{{cls.single_node}}/?id={{m.id}}">{{m}}</a>
+			<a href="/g/{{cls.form_node}}">New</a>  <a href="/g/{{cls.form_node}}/?instance_id={{m.id}}">Edit</a> <a href="/g/{{cls.delete_node}}/?instance_id={{m.id}}&flag_process=1">Delete</a>
+	</div>
+{% endfor %}

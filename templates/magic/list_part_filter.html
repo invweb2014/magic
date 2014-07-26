@@ -1,0 +1,68 @@
+ {%  extends parent_template %}
+
+{% block content %}
+    {% if list_params.filter_url %}
+   	<div class="filter-chain">
+	    {% for k, v in list_params.filter_url.items %}
+	      	{{k}} = {{v}} 
+	      	<a href="/g/{{cls.my_node}}/?&a=1{% for k2, v2 in list_params.filter_url.items%}{% ifnotequal k k2%}&{{k2}}={{v2}}{% endifnotequal %}{%endfor%}&sort-by={{list_params.sort_by}}">
+	      		(x)
+	      	</a>
+	    {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if list_params.filter_list %}
+    <div class="filter-cat">
+			{% for f, v in list_params.filter_list.items %}
+			{{f}}
+			<ul>
+			    {% for p in v.detail %}
+			    	<li>
+			    		<a href="{{p.link}}&sort-by={{list_params.sort_by}}">
+			    			{{p.val}}
+			    		</a>
+			    	</li>
+			    {% endfor %}
+			</ul>
+			{% endfor %}
+	</div>
+	{% endif %}
+	
+	<div class="list-result">
+		<div class="page-info">
+			showing {{mdict.num_start}} - {{mdict.num_end}} of {{mdict.num_total}} results</p>
+		</div>
+							
+		<div style="float:right; width: 300px;">
+		    Sort by: 
+		    {% for s in cls.sort_list %}
+               {% if list_params.sort_by == s %}
+                    {{s}}
+               {%else %}
+                	<a href="/g/{{cls.my_node}}/?a=1{% for k2, v2 in list_params.filter_url.items%}&{{k2}}={{v2}}{%endfor%}&sort-by={{s}}">
+                    	{{s}}
+                 	</a>
+                {% endif %}
+		    {% endfor %}
+		</div>
+								
+		<div class="list">
+		{% for m in mdict.result %}
+				<div class="grid-item">
+						<a href="/g/{{cls.single_node}}/?id={{m.id}}">{{m}}</a>
+						<a href="/g/{{cls.form_node}}">New</a>  <a href="/g/{{cls.form_node}}/?instance_id={{m.id}}">Edit</a> <a href="/g/{{cls.delete_node}}/?instance_id={{m.id}}&flag_process=1">Delete</a>
+				</div>
+		{% endfor %}
+		</div>
+					
+		<div class="paging">
+			{% for n in mdict.page_list %}
+				<a href="/g/{{cls.my_node}}/?a=1{% for k2, v2 in list_params.filter_url.items%}&{{k2}}={{v2}}{%endfor%}&page={{n}}&sort-by={{list_params.sort_by}}">
+					{{n}}
+				</a>
+			{% endfor %}
+		<div>			
+	</div>
+
+{% endblock %}

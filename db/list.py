@@ -29,11 +29,14 @@ class ListDb(Db):
         end =  start + len(result) - 1   
         last_page =  math.ceil(float(total)/item_per_page)
         
-        return {    'result':result,
-                    'page':page,
-                    'start':start,
-                    'end':end,
-                    'total':total,
-                    'last_page':last_page}
+        return {    'list':result,
+                    'part_paging':{'page':page,
+                                'start':start,
+                                'end':end,
+                                'total':total,
+                                'last_page':last_page
+                               },
+                    'part_filters':filters
+                }
         
     

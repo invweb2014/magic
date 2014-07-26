@@ -7,7 +7,7 @@ class Item(Node):
 	perm_list = []
 	
 	@classmethod
-	def run(cls, request):
+	def run(cls, request, get, post, args={}):
 		'''argument: cls, request
 		   return: result dict
 		'''

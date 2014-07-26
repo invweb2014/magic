@@ -12,7 +12,7 @@ class Route(object):
 		znode = None
 		exec(path)
 		
-		result = znode.run(request)
+		result = znode.run(request, request.GET, request.POST, {})
 		return znode.render(request, result)
 		
 	

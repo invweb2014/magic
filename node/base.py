@@ -14,24 +14,20 @@ class Node(object):
 
     @classmethod
     @has_perm(['dummy',])
-    def run(cls, request):
+    def run(cls, request, get, post, args={}):
         '''argument: cls, request
            return: result dict
         '''
         return {}
     
     @classmethod
-    def render(cls, request, result):
-        '''argument: result{'response':'html|ajax|redirect'}
-                     json: return {'response_type':'confirm|redirect|error|html', 'content':'...'}
-           return: ( html | json | redirect )
-        '''
-        if result['response_type'] == 'html':
+    def render(cls, request, get, post, args, result):
+        response = request.GET.get('response,' 'html')
+        if response == 'html':
             return render_to_response(cls.template, result, context_instance=RequestContext(request),)
-        elif result['response'] == 'ajax':
+        elif response == 'string':
              pass
-        elif result['redirect'] == 'html': 
-            pass
+        
            
         
         

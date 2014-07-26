@@ -12,25 +12,9 @@ class List(Node):
     mpp = 100
     sort_by = '-id'
     
-    @classmethod
-    def get_filter(cls, request):
-        filters = cls.model._meta.get_all_field_names()
-
-    @classmethod
-    def transform_filter_url_to_dict(cls, request):
-        filters = cls.get_filter(request)
-        f = {}
-        for k in request.GET.keys():
-            if k in filters:
-                    f[k] =  request.GET.get(k)
-        return f
     
     @classmethod
-    def transform_filter_db_to_dict(cls, request):
-        filters = cls.model._meta.get_all_field_names()
-                    
-    @classmethod
-    def run(cls, request):
+    def run(cls, request, get, post, args={}):
         '''argument: cls, request
            return: result dict
         '''
@@ -40,6 +24,6 @@ class List(Node):
         filters = cls.transform_filter_url_to_dict(request)
         if cls.model:
                 e_list = ListDb.get(cls.model, filters, page, item_per_page, sort_by)
-                return {'e_list':e_list}
+                return e_list
         else:
                 return {}

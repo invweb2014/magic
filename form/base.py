@@ -32,7 +32,7 @@ class BForm(Node):
     tclass = "my-form"
     
     @classmethod
-    def run(cls, request):
+    def run(cls, request, get, post, args={}):
         '''argument: cls, request
            return: result dict
         '''
@@ -52,8 +52,7 @@ class BForm(Node):
             if form.is_valid(): 
                 return form.process(request)
             return {'form':form, 'response':'html'}
-        
-    #@post_after
+
     def process(self, request):
         self.save()
         result = {'response':'redirect', 'content':'/'}
