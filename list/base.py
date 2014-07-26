@@ -4,26 +4,35 @@ from magic.db.list import ListDb
 class List(Node):
     model = None
     template = "magic/list.html"
-    parent_template = None
+    parent_template = "magic/index.html"
     perm_list = []
     
-    page = 1
-    item_per_page = 30
-    mpp = 100
-    sort_by = '-id'
+    tsort = ['-id']
+    tfilter = []
+    titem_per_page = 30
+ 
+    @classmethod 
+    def get_ufilters(cls, request, GET, post):
+        return {}
+   
     
-    
+    @classmethod
+    def get_tfilters(cls, request, GET, post):
+        pass
+       
+       
     @classmethod
     def run(cls, request, get, post, args={}):
         '''argument: cls, request
            return: result dict
         '''
-        page = int(request.GET.get('page', cls.page))
-        item_per_page = int(request.GET.get('item_per_page', cls.page))
-        sort_by = request.GET.get('sort_by', cls.sort_by)
-        filters = cls.transform_filter_url_to_dict(request)
+        page = int(request.GET.get('page', 1))
+        item_per_page = int(request.GET.get('item_per_page', cls.titem_per_page))
+        sort_by = request.GET.get('sort_by', cls.tsort[0])
+        filters = cls.get_ufilters(request, get, post)
         if cls.model:
                 e_list = ListDb.get(cls.model, filters, page, item_per_page, sort_by)
-                return e_list
+                e_list['part_tfilters'] = cls.get_tfilters(request, get, post)
+                e_list['part_tfilters_selected'] = filters
         else:
                 return {}

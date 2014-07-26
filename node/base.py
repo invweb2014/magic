@@ -22,8 +22,13 @@ class Node(object):
     
     @classmethod
     def render(cls, request, get, post, args, result):
-        response = request.GET.get('response,' 'html')
+        response = get.get('response,' 'html')
+        
+        if response == None:
+            response = 'html'
+        print "response: %s" % str(response)
         if response == 'html':
+            result['parent_template'] = cls.parent_template
             return render_to_response(cls.template, result, context_instance=RequestContext(request),)
         elif response == 'string':
              pass

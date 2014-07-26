@@ -36,7 +36,6 @@ class ListDb(Db):
                                 'total':total,
                                 'last_page':last_page
                                },
-                    'part_filters':filters
                 }
         
     
