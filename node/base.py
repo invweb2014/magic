@@ -24,6 +24,7 @@ class Node(object):
     def render(cls, request, get, post, args, result):
         response = get.get('response,' 'html')
         
+        print "result: %s" % str(result)
         if response == None:
             response = 'html'
         print "response: %s" % str(response)

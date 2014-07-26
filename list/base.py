@@ -7,7 +7,7 @@ class List(Node):
     parent_template = "magic/index.html"
     perm_list = []
     
-    tsort = ['-id']
+    tsort = ['time_create', 'symbol']
     tfilter = []
     titem_per_page = 30
  
@@ -34,5 +34,10 @@ class List(Node):
                 e_list = ListDb.get(cls.model, filters, page, item_per_page, sort_by)
                 e_list['part_tfilters'] = cls.get_tfilters(request, get, post)
                 e_list['part_tfilters_selected'] = filters
+                
+                part_tpages = [x for x in range(1, e_list['part_paging']['last_page']+1)]
+                e_list['part_tpages'] = part_tpages
+                e_list['part_tsort'] = cls.tsort
+                return e_list
         else:
-                return {}
+                return {'error':'...'}

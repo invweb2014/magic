@@ -1,6 +1,6 @@
-<div class="pagination">
-	{% for n in mdict.page_list %}
-		<a href="/g/{{cls.my_node}}/?a=1{% for k2, v2 in list_params.filter_url.items%}&{{k2}}={{v2}}{%endfor%}&page={{n}}&sort-by={{list_params.sort_by}}">
+<div class="pagination"
+	{% for n in  part_tpages %}
+		<a href="/ga/?page={{n}}">
 			{{n}}
 		</a>
 	{% endfor %}

@@ -17,7 +17,7 @@ class ListDb(Db):
         
         # run the query
         instant_list = None
-        db_str = "instant_list = cls.objects.all()%s" % filter_str
+        db_str = "instant_list = model.objects.all()%s" % filter_str
         exec(db_str)
         
         # paging
@@ -27,7 +27,7 @@ class ListDb(Db):
         
         start = 1 + item_per_page * (page - 1)
         end =  start + len(result) - 1   
-        last_page =  math.ceil(float(total)/item_per_page)
+        last_page =  int(math.ceil(float(total)/item_per_page))
         
         return {    'list':result,
                     'part_paging':{'page':page,

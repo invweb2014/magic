@@ -1,10 +1,4 @@
-Sort by: 
-{% for s in cls.sort_list %}
-   {% if list_params.sort_by == s %}
-        {{s}}
-   {%else %}
-    	<a href="/g/{{cls.my_node}}/?a=1{% for k2, v2 in list_params.filter_url.items%}&{{k2}}={{v2}}{%endfor%}&sort-by={{s}}">
-        	{{s}}
-     	</a>
-    {% endif %}
+<h2>Sort by</h2> 
+{% for s in part_tsort %}
+		<a href="">{{s}}</a> 
 {% endfor %}
