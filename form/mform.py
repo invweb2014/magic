@@ -22,10 +22,17 @@ from magic.form.base import BForm
 class MForm(ModelForm, BForm):
     model = None
     template = "magic/ftable.html"
-    parent_template = None
     perm_list = []
     need_ownership = False
  
     class Meta:
         pass
         model = None
+        
+    def process(self, request):
+        self.save()
+        result = {'response':'redirect', 'content':'/'}
+        return result
+        
+    def save_instance(self):
+        self.save()

@@ -1,5 +1,7 @@
-class Redirct(object):
+from django.http import HttpResponseRedirect
+
+class Redirect(object):
     @staticmethod
     def redirect(request, url):
-        pass
+         return HttpResponseRedirect(url)
     

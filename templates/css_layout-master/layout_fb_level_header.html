@@ -1,0 +1,221 @@
+<html>
+<head>
+	
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div class="header">
+  <div class="section-wrap">
+	<div class="login_stub">
+      <form action="/login..." method = "POST">
+		<table>
+			<tr>
+				<td><input type="email" placeholder="Email" /></td>
+				<td><input type="password" placeholder="Password"/></td>
+				<td><input type="submit" value="Login" class="pure-button"/></td>
+				
+			</tr>
+			
+			<tr>
+				<td><a href=""><small>Sign Up</small></a></td>
+				<td><a href=""><small>Forgot Password?</small></a></td>				
+				<td></td>
+			</tr>
+			
+			<tr>
+			</tr>
+		</table>
+      </form>
+    </div>
+	
+    <div class="logo"></div>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+<div class="header-nav">
+  <div class="section-wrap">
+    <nav>
+		<ul class="inline">
+						<li><a href="">Link A</a></li>
+						<li><a href="">Link B</a></li>
+						<li><a href="">Link A</a></li>
+						<li><a href="">Link B</a></li>
+						<li><a href="">Link A</a></li>
+						<li><a href="">Link B</a></li>
+		</ul>
+	</nav>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+
+
+
+<div class="content">
+  <div class="section-wrap">
+    <div class="left-col" id="left-col">
+		<div class="inner">
+			<ul class="nav-side">
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+					<li><a href="">Link A</a></li>
+					<li class="break"></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+					<li><a href="">Link B</a></li>
+					<li class="break"></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main-col" id="main-col">
+		<div class="inner">
+					<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+			
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+					<div class="clearboth"></div>
+		</div>
+	</div>
+    <div class="right-col" id="right-col">
+		<div class="inner">right col</div>
+	</div>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+<div class="footer">
+  <div class="section-wrap"><div class="inner">
+		<ul class="inline">
+			<li><a href="">Privacy</a></li>
+			<li><a href="">About</a></li>
+		</ul>
+  </div></div>
+</div>
+
+<script>
+	left_col = document.getElementById("left-col").offsetHeight;
+	right_col = document.getElementById("right-col").offsetHeight;
+	main_col = right_col = document.getElementById("main-col").offsetHeight;
+	
+	max = left_col;
+	if (right_col > max){
+		max = right_col;
+	}
+	if (main_col > max){
+		max = main_col;
+	}
+	
+	document.getElementById('left-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('right-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('main-col').setAttribute("style","height:" + max + "px");
+	
+</script>
+</body>
+</html>

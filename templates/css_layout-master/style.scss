@@ -1,0 +1,233 @@
+$page-font: 				'robotolight', arial;
+$page-font-size: 			14px;
+$header-bg-color:  			rgba(57, 174, 255, 0.95);
+$header-link-color:			#FFF;
+$link-color:				#004EFF;
+$placeholder-color: 		#bbb;
+$placeholder-font-size: 	0.9em;
+$border-gray-color: 		#ccc;
+$std-margin: 				20px;
+$std-padding: 				15px;
+
+@font-face {
+		font-family: $page-font;
+		src: url('roboto-light-webfont.eot');
+		src: url('roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
+			 url('roboto-light-webfont.woff') format('woff'),
+			 url('roboto-light-webfont.ttf') format('truetype'),
+			 url('roboto-light-webfont.svg#robotolight') format('svg');
+		font-weight: normal;
+		font-style: normal;
+}
+
+@mixin place-holder() {
+   /*
+   font-size: $placeholder-font-size;
+   color: $placeholder-color;
+   */
+}
+
+@mixin b-sizing() {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+
+/* --- universal element --- */
+*{
+	font-family: $page-font
+}
+
+body{
+	background-image: url('noise_lines.png');
+}
+
+body, header, form{
+	margin: 0; 
+	padding: 0;
+	font-family: arial;
+	font-size: $page-font-size;
+}
+
+a{
+	color: $link-color;
+	text-decoration: none;
+}
+
+ul{
+	list-style: none;
+	margin: 0; 
+	padding: 0;
+}
+
+/* --- univrsal class --- */
+.clearboth{
+	clear:both;
+}
+
+ul.inline li{
+	display: inline;
+}
+
+/* --- place holders --- */
+::-webkit-input-placeholder {
+	@include place-holder();
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   @include place-holder();
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   @include place-holder();
+}
+
+:-ms-input-placeholder {  
+   @include place-holder();
+}
+
+/* --- page width --- */
+.section-wrap{
+	width: 900px;
+	margin: 0 auto;
+}
+
+/* --- header --- */
+.header{
+	background-color: $header-bg-color;
+	position: relative;
+}
+
+.header-nav{
+	background-color: #333333;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.header-nav li{
+	padding-right: 15px;
+}
+
+.header a, 
+.header-nav a{
+	
+}
+
+.logo{
+	float: left;
+	width: 125px;
+	height: 50px;
+	border: solid #eee 1px;
+	margin-top: $std-margin;
+	margin-bottom: $std-margin;
+}
+
+/* --- login form --- */
+.login_stub{
+	float: right;
+	padding: 10px;
+	background-color: rgba(78, 165, 255, 0.25);
+	border: solid #ccc 0px;
+}
+
+.login_stub label, 
+.login_stub input {
+	display: inline-block;
+	/*height: 25px;*/
+}
+
+.login_stub form, 
+.login_stub input {
+	 @include b-sizing();
+}
+
+.login_stub .button_a{
+	background-color: #EEEEEE;
+	border-color: #999999 #999999 #888888;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 0px 0 rgba(0, 0, 0, 0.1);
+	
+	color: #333333;
+	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	
+	line-height: 20px;
+	padding: 0 6px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	display: inline-block;
+	text-decoration: none;
+	border-radius: 2px;
+}
+
+.login_stub a:hover{
+	text-decoration: underline;
+}
+
+/* --- content --- */
+.content{
+}
+
+.left-col{
+	box-sizing: border-box;
+	width: 180px;
+	float: left;
+	height: 100px;
+	border-right: solid $border-gray-color 1px;
+	padding-right: $std-padding;
+	padding-top: $std-padding;
+}
+
+.main-col{
+	box-sizing: border-box;
+	width: 600px; 
+	float: left;
+	padding-left: $std-padding; 
+	padding-right: $std-padding;
+	padding-top: $std-padding;
+	border-bottom: solid $border-gray-color 1px;
+}
+
+.right-col{
+	box-sizing: border-box;
+	width: 120px;
+	float: left;
+	height: 200px;
+	border-left: solid $border-gray-color 1px;
+	padding-left: $std-padding;
+	padding-top: $std-padding;
+}
+
+.item{
+	float: left;
+	width: 32%;
+	margin-bottom: $std-margin;
+	box-sizing: border-box;
+	border: solid $border-gray-color 1px;
+}
+
+.item:nth-child(3n-1){
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+/* --- footer --- */
+.footer .section-wrap{
+	border-top: solid $border-gray-color 1px; 
+	padding-top: 20px;
+	margin-top: $std-margin;
+}
+
+.footer ul{
+	text-align: center;
+}
+
+.footer li{
+	padding-right: 25px; 
+	font-size: 0.85em;
+}
+

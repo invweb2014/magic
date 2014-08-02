@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form name="{{form.tclass}}" action="." method="POST" {% if form.fupload %}enctype="multipart/form-data"{%endif %} class="magic-form">
+<form name="{{form.tclass}}" action="{{request.get_full_path}}" method="POST" {% if form.fupload %}enctype="multipart/form-data"{%endif %} class="magic-form">
     <h3>{{form.form_name}}</h3>
     {% csrf_token %}  
  	<table>

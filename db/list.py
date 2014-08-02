@@ -6,18 +6,21 @@ from django.core.paginator import Paginator
 class ListDb(Db):
     @staticmethod
     def get(model, filters, page, item_per_page, sort_by):
+        page = int(page)
+        print "****************************page: %d" % page
         filter_str = ''
         if len(filters.keys()) > 0:
             for k in filters.keys():
                 filter_str = filter_str + ".filter(%s='%s')" % (k, filters[k])
         
         #build order by
-        if sort_by != None: 
+        if sort_by: 
             filter_str = filter_str + ".order_by('%s')" %  sort_by            
         
         # run the query
         instant_list = None
         db_str = "instant_list = model.objects.all()%s" % filter_str
+        print "************************db_str: %s" % db_str
         exec(db_str)
         
         # paging

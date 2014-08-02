@@ -37,15 +37,15 @@ class BForm(Node):
            return: result dict
         '''
         if request.method == 'GET': 
-            if cls.model and request.GET.get(id):
-                e = ItemDb.get(cls.model, {'id':request.GET.get(id)});
+            if cls.model and request.GET.get('id'):
+                e = ItemDb.get(cls.model, {'id':request.GET.get('id')});
                 form = cls(instance=e)
             else:
                 form = cls()
             return {'form':form, 'response':'html'}
         elif request.method == 'POST':
             if cls.model:
-                e = ItemDb.get(cls.model, {'id':request.GET.get(id)});
+                e = ItemDb.get(cls.model, {'id':request.GET.get('id')});
                 form = cls(request.POST, request.FILES, instance=e)
             else:
                 form = cls(request.POST)

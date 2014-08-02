@@ -4,7 +4,7 @@ class ItemDb(Db):
     @staticmethod
     def get(model, filters={}):
         e = None
-        db_str = "e = models.objects.get(id=%s)" % filters['id']
+        db_str = "e = model.objects.get(id=%s)" % filters['id']
         exec(db_str)
         return e
     

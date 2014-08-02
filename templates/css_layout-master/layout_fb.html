@@ -1,0 +1,111 @@
+<html>
+<head>
+<style>
+	body{
+		margin: 0; 
+		padding: 0;
+	}
+	
+	.header{
+		height: 70px;
+		background-color: #ccc;
+	}
+	
+	.section-wrap{
+		width: 900px;
+		margin: 0 auto;
+	}
+	
+	.content{
+		background-color: #eee;
+		height: 500px;
+	}
+	
+	.footer{
+		background-color: #ddd;
+		height: 50px;
+	}
+	
+	.left-col{
+		background-color: #666;
+		width: 180px;
+		float: left;
+		height: 100px;
+	}
+	
+	.main-col{
+		background-color: #999;
+		width: 600px; 
+		float: left;
+		height: 500px;
+	}
+	
+	.right-col{
+		background-color: #333;
+		width: 120px;
+		float: left;
+		height: 200px;
+	}
+	
+	.clearboth{
+		clear:both;
+	}
+	
+	.login_stub{
+			float: right;
+			padding-top: 10px;
+	}
+</style>
+</head>
+
+<body>
+<div class="header">
+  <div class="section-wrap">
+    <div class="logo"></div>
+    <div class="login_stub">
+      <form action="/login..." method = "POST">
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password"/>
+        <input type="submit" value="Login "/>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="section-wrap">
+    <div class="left-col" id="left-col">
+		<div class="inner">left col</div>
+	</div>
+	<div class="main-col" id="main-col">
+		<div class="inner">main content</div>
+	</div>
+    <div class="right-col" id="right-col">
+		<div class="inner">right col</div>
+	</div>
+  </div>
+</div>
+<div class="clearboth"></div>
+<div class="footer">
+  <div class="section-wrap"><div class="inner">footer</div></div>
+</div>
+
+<script>
+	left_col = document.getElementById("left-col").offsetHeight;
+	right_col = document.getElementById("right-col").offsetHeight;
+	main_col = right_col = document.getElementById("main-col").offsetHeight;
+	
+	max = left_col;
+	if (right_col > max){
+		max = right_col;
+	}
+	if (main_col > max){
+		max = main_col;
+	}
+	
+	document.getElementById('left-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('right-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('main-col').setAttribute("style","height:" + max + "px");
+	
+</script>
+</body>
+</html>

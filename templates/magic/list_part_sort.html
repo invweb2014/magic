@@ -1,4 +1,9 @@
-<h2>Sort by</h2> 
+sort by: 
 {% for s in part_tsort %}
-		<a href="">{{s}}</a> 
+		{% ifequal part_tsort_selected s %}
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s}}</a> 
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr=-{{s}}" class="selected">-{{s}}</a> 
+		{% else %}
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s}}</a> 
+		{% endifequal %}
 {% endfor %}

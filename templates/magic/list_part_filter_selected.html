@@ -1,10 +1,8 @@
-{% if list_params.filter_url %}
-   	<div class="filter-chain">
-	    {% for k, v in list_params.filter_url.items %}
-	      	{{k}} = {{v}} 
-	      	<a href="/g/{{cls.my_node}}/?&a=1{% for k2, v2 in list_params.filter_url.items%}{% ifnotequal k k2%}&{{k2}}={{v2}}{% endifnotequal %}{%endfor%}&sort-by={{list_params.sort_by}}">
-	      		(x)
-	      	</a>
-	    {% endfor %}
-    </div>
-{% endif %}
+{% for k, v in part_tfilters_selected.items %}
+	{{k}} = {{v}}<a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rm=1"> x </a> &nbsp; &nbsp;
+{% endfor %}
+
+
+<a href="{{url_prefix}}&page_rr={{1}}{% for k, v in part_tfilters_selected.items %}&{{k}}_rm=1{% endfor %}">
+Clear All
+</a>

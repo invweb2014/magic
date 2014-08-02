@@ -1,7 +1,6 @@
-
-<h1>list_part_list.html</h1>
 {% for m in list %}
 	<div class="grid-item">
 			{{m}}
+			<a href="/a/{{cls.tname_form}}/?id={{m.id}}">(edit)</a>
 	</div>
 {% endfor %}

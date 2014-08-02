@@ -15,6 +15,18 @@
 {% block body %}
 	<body>
 			<div class="nav">{% block nav %}{% endblock %}</div>
+			<div class="msg">
+				{% block msg %}
+					{% if messages %}
+					<ul class="msg">
+							{% for m in messages %}
+								{{m}}
+							{% endfor %}
+					</ul>
+					{% endif %}
+				{% endblock %}
+			</div>
+			
 			<div class="content">{% block content %}Magic Index{% endblock %}</div>
 			<div class="footer">{% block footer %}{% endblock %}</div>
 	</body>

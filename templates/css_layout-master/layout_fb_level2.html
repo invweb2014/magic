@@ -1,0 +1,205 @@
+<html>
+<head>
+<style>
+	@font-face {
+			font-family: 'robotolight';
+			src: url('roboto-light-webfont.eot');
+			src: url('roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
+				 url('roboto-light-webfont.woff') format('woff'),
+				 url('roboto-light-webfont.ttf') format('truetype'),
+				 url('roboto-light-webfont.svg#robotolight') format('svg');
+			font-weight: normal;
+			font-style: normal;
+
+	}
+
+	*{
+		font-family: 'robotolight', arial;
+	}
+	
+	body, header{
+		margin: 0; 
+		padding: 0;
+		font-family: arial;
+		font-size: 14px;
+	}
+	a{
+		color: #004EFF;
+	}
+	
+	ul{
+		list-style: none;
+		margin: 0; 
+		padding: 0;
+	}
+
+	ul li a{
+		text-decoration: none;
+	}
+	
+	.header{
+		height: 70px;
+		background-color: #39AEFF;
+	}
+	
+	.section-wrap{
+		width: 900px;
+		margin: 0 auto;
+	}
+	
+	.content{
+		background-color: #fff;
+		height: 500px;
+	}
+	
+	.footer{
+		background-color: #fff;
+		height: 50px;
+	}
+	
+	.left-col{
+		box-sizing: border-box;
+		background-color: #fff;
+		width: 180px;
+		float: left;
+		height: 100px;
+		border-right: solid #eee 1px;
+		padding-right: 15px;
+		padding-top: 20px;
+	}
+	
+	.main-col{
+		box-sizing: border-box;
+		background-color: #fff;
+		width: 600px; 
+		float: left;
+		height: 500px;
+		padding-left: 15px; 
+		padding-right: 15px;
+		padding-top: 20px;
+	}
+	
+	.right-col{
+		box-sizing: border-box;
+		background-color: #fff;
+		width: 120px;
+		float: left;
+		height: 200px;
+		border-left: solid #eee 1px;
+		padding-left: 15px;
+		padding-top: 20px;
+	}
+	
+	.clearboth{
+		clear:both;
+	}
+	
+	.login_stub{
+			float: right;
+			padding-top: 10px;
+	}
+	
+	.header ul{
+		list-style: none;
+	}
+	
+	.header li{
+		display: inline;
+	}
+	
+	.header li, .header a{
+		color: #fff;
+		text-decoration: none;
+	}
+</style>
+</head>
+
+<body>
+<div class="header">
+  <div class="section-wrap">
+    <div class="logo"></div>
+    <nav>
+		<ul>
+				<li><a href="">Link A</a></li>
+				<li><a href="">Link B</a></li>
+		</ul>
+	</nav>
+	
+	<div class="login_stub">
+      <form action="/login..." method = "POST">
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password"/>
+        <input type="submit" value="Login "/>
+      </form>
+    </div>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+
+
+<div class="content">
+  <div class="section-wrap">
+    <div class="left-col" id="left-col">
+		<div class="inner">
+			<ul class="nav-side">
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+					<li><a href="">Link A</a></li>
+					<li class="break"></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+					<li><a href="">Link B</a></li>
+					<li class="break"></li>
+					<li><a href="">Link A</a></li>
+					<li><a href="">Link B</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="main-col" id="main-col">
+		<div class="inner">
+			<div class="item">
+				<img src=""></img>
+				<h3>Post Title</h3>
+				<p>Description...</p>
+				<small>Timestamp</small>
+			</div>
+		</div>
+	</div>
+    <div class="right-col" id="right-col">
+		<div class="inner">right col</div>
+	</div>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+<div class="footer">
+  <div class="section-wrap"><div class="inner">
+		<ul>
+			<li><a href="">Privacy</a></li>
+			<li><a href="">About</a></li>
+		</ul>
+  </div></div>
+</div>
+
+<script>
+	left_col = document.getElementById("left-col").offsetHeight;
+	right_col = document.getElementById("right-col").offsetHeight;
+	main_col = right_col = document.getElementById("main-col").offsetHeight;
+	
+	max = left_col;
+	if (right_col > max){
+		max = right_col;
+	}
+	if (main_col > max){
+		max = main_col;
+	}
+	
+	document.getElementById('left-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('right-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('main-col').setAttribute("style","height:" + max + "px");
+	
+</script>
+</body>
+</html>
