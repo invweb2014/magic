@@ -8,6 +8,8 @@ from route.base import Route
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'xprj.views.home', name='home'),
+   
     (r'(?P<node>.+)/', Route.route),
+ 
 
 )

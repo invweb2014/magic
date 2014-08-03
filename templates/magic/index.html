@@ -2,33 +2,116 @@
 {% block header %}
 	<head>
 		<title>{% block title %}{% endblock %}</title>
-		{% block css %}{% endblock %}
+		
+		{% block css %}
+			<link rel="stylesheet" type="text/css" href="/a/static/default/css/style.css">
+		{% endblock %}
+		
 		{% block css2 %}{% endblock %}
 		{% block css3 %}{% endblock %}
 		
 		{% block js %}{% endblock %}
 		{% block js2 %}{% endblock %}
 		{% block js3 %}{% endblock %}
+		
 	</head>
 {% endblock %}
 
-{% block body %}
-	<body>
-			<div class="nav">{% block nav %}{% endblock %}</div>
-			<div class="msg">
-				{% block msg %}
-					{% if messages %}
-					<ul class="msg">
-							{% for m in messages %}
-								{{m}}
-							{% endfor %}
-					</ul>
-					{% endif %}
-				{% endblock %}
-			</div>
+<body>
+
+<div class="header">
+  <div class="section-wrap">
+	<div class="login_stub">
+      <form action="/login..." method = "POST">
+		<table>
+			<tr>
+				<td><input type="email" placeholder="Email" /></td>
+				<td><input type="password" placeholder="Password"/></td>
+				<td><input type="submit" value="Login" class="pure-button"/></td>
+				
+			</tr>
 			
-			<div class="content">{% block content %}Magic Index{% endblock %}</div>
-			<div class="footer">{% block footer %}{% endblock %}</div>
-	</body>
-{% endblock %}
+			<tr>
+				<td><a href=""><small>Sign Up</small></a></td>
+				<td><a href=""><small>Forgot Password?</small></a></td>				
+				<td></td>
+			</tr>
+			
+			<tr>
+			</tr>
+		</table>
+      </form>
+    </div>
+    <p class="logo"></p>
+    <div class="clearboth"></div>
+  </div>
+</div>
+
+<div class="header-nav">
+  <div class="section-wrap">
+    	{% block nav %}{% endblock %}
+  </div>
+</div>
+
+<div class="msg">
+	{% block msg %}
+		{% if messages %}
+		<ul class="msg">
+				{% for m in messages %}
+					{{m}}
+				{% endfor %}
+		</ul>
+		{% endif %}
+	{% endblock %}
+</div>
+
+<div class="content">
+  <div class="section-wrap">
+    	<div class="left-col" id="left-col">
+			{% block left-col %}{% endblock %}
+		</div>
+		
+		<div class="main-col" id="main-col">
+			{% block content %}Magic Index{% endblock %}
+		</div>
+	    
+	    <div class="right-col" id="right-col">
+			{% block side-bar %}{% endblock %}
+		</div>
+  </div>
+  <div class="clearboth"></div>
+</div>
+
+<div class="footer">
+  <div class="section-wrap">
+  		{% block footer %}
+		<ul class="inline">
+			<li><a href="">Privacy</a></li>
+			<li><a href="">About</a></li>
+		</ul>
+		{% endblock %}
+  </div>
+</div>
+
+<script>
+	left_col = document.getElementById("left-col").offsetHeight;
+	right_col = document.getElementById("right-col").offsetHeight;
+	main_col = right_col = document.getElementById("main-col").offsetHeight;
+	
+	
+	max = left_col;
+	if (right_col > max){
+		max = right_col;
+	}
+	if (main_col > max){
+		max = main_col;
+	}
+	
+	document.getElementById('left-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('right-col').setAttribute("style","height:" + max + "px");
+	document.getElementById('main-col').setAttribute("style","height:" + max + "px");
+	
+</script>
+	
+</body>
 </html>

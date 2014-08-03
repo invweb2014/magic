@@ -1,6 +1,8 @@
 {% for m in list %}
 	<div class="grid-item">
 			{{m}}
-			<a href="/a/{{cls.tname_form}}/?id={{m.id}}">(edit)</a>
+			<a href="/a/{{cls.tname_form}}/?id={{m.id}}" >
+				<img src="/a/static/default/Batch-master/PNG/16x16/pen.png" title="edit" alt="edit" class="action-icon"></img>
+			</a>
 	</div>
 {% endfor %}

@@ -1,1 +1,5 @@
-showing {{part_paging.start}} - {{part_paging.end}} of {{part_paging.total}} result(s)
+{% if part_paging.total > 0 %}
+	Showing {{part_paging.start}} - {{part_paging.end}} of {{part_paging.total}} result(s)
+{% else %}
+	Sorry, no result found.
+{% endif %}

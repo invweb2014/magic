@@ -1,9 +1,9 @@
-sort by: 
+Sort by: 
 {% for s in part_tsort %}
 		{% ifequal part_tsort_selected s %}
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s}}</a> 
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr=-{{s}}" class="selected">-{{s}}</a> 
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s|capfirst}}</a> 
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr=-{{s}}" class="selected">-{{s|capfirst}}</a> 
 		{% else %}
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s}}</a> 
+			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s|capfirst}}</a> 
 		{% endifequal %}
 {% endfor %}

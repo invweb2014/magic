@@ -1,8 +1,15 @@
 {% for k, v in part_tfilters_selected.items %}
-	{{k}} = {{v}}<a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rm=1"> x </a> &nbsp; &nbsp;
+	<p class="selected-filter">
+		<a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rm=1">
+			{{k|capfirst}} = {{v|capfirst}} <img src="/a/static/default/Batch-master/PNG/16x16/delete.png" title="remove" alt="remove" class="action-icon" ></img>
+		</a> 
+	</p>
 {% endfor %}
 
-
-<a href="{{url_prefix}}&page_rr={{1}}{% for k, v in part_tfilters_selected.items %}&{{k}}_rm=1{% endfor %}">
-Clear All
-</a>
+{% if part_tfilters_selected.items %}
+<p class="selected-filter">
+	<a href="{{url_prefix}}&page_rr={{1}}{% for k, v in part_tfilters_selected.items %}&{{k}}_rm=1{% endfor %}">
+	Clear All  <img src="/a/static/default/Batch-master/PNG/16x16/delete.png" title="remove" alt="remove" class="action-icon"></img>
+	</a>
+</p>
+{% endif %}

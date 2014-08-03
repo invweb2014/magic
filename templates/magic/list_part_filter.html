@@ -1,19 +1,18 @@
-&nbsp;
-
-<ul>
-{% for k, v in part_tfilters.items %}
-	<li>
-		{{k}}
-		<ul>
-				{% for x in v %}
-					{% ifequal x.selected 'yes' %}
-						<li><a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rm={{x.val}}" class="selected"><b>{{x.val}}</b></a></li>
-					{% else %}
-						<li><a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rr={{x.val}}" class="selected">{{x.val}}</a></li>
-				
-					{% endifequal %}
-				{% endfor %}
+		<ul class="filter">
+		{% for k, v in part_tfilters.items %}
+			<li>
+				<p class="li-title">{{k|capfirst}}</p>
+				<ul>
+						{% for x in v %}
+							{% if x.val %}
+									{% ifequal x.selected 'yes' %}
+										<li><a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rm={{x.val}}" class="selected">{{x.val|capfirst}}</a></li>
+									{% else %}
+										<li><a href="{{url_prefix}}&page_rr={{1}}&{{k}}_rr={{x.val}}" >{{x.val|capfirst}}</a></li>
+									{% endifequal %}
+							{% endif %}
+						{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
 		</ul>
-	</li>
-{% endfor %}
-</ul>

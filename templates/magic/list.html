@@ -1,60 +1,30 @@
 {%  extends parent_template %}
 
-{% block content %}	
-	<style>
-			.list-left{
-				float:left;
-				width: 20%;
-				box-shadow: 0px 0px 1px 1px #888888;
-			}
-			
-			.list-right{
-				float: left;
-				background-color: #aaa;
-				width: 80%;
-			}
-			
-			.list-part-page-info{
-				float: left;
-			}
-			
-			.list-part-sort{
-				float: right;
-			}
-			
-			.list-part-list{
-				margin-bottom: 15px;
-			}
-	</style>
-	<div class="list">
-			
-			<div class="list-left">
-				<div class="list-part-filter">
-					{% include 'magic/list_part_filter.html' %}
-				</div>
-			</div>
-			
-			<div class="list-right">		
-					<p class="list-part-page-info">
-						{% include 'magic/list_part_page_info.html' %}
-					</p>	
-				
-					<p class="list-part-sort">
-						{% include 'magic/list_part_sort.html' %}
-					</p>
-				
-					<div class="list-part-filter-selected">
-						{% include 'magic/list_part_filter_selected.html' %}
-					</div>
-				
-					<div style="clear: both;"></div>
-					<div class="list-part-list">
-						{% include 'magic/list_part_list.html' %}
-					</div>
-					
-					<div class="list-part-pagination">
-						{% include 'magic/list_part_pagination.html' %}
-					</div>
-			</div>
-	</div>
+{% block css2 %}
 {% endblock %}
+
+{% block left-col %}	
+	{% include 'magic/list_part_filter.html' %}
+{% endblock %}	
+
+{% block content %}		
+		<p class="list-part-page-info">
+			{% include 'magic/list_part_page_info.html' %}
+		</p>	
+	
+		<p class="list-part-sort">
+			{% include 'magic/list_part_sort.html' %}
+		</p>
+	
+		<p class="list-part-filter-selected">
+			{% include 'magic/list_part_filter_selected.html' %}
+		</p>
+	
+		<p class="list-part-list">
+			{% include 'magic/list_part_list.html' %}
+		</p>
+		
+		<p class="list-part-pagination">
+			{% include 'magic/list_part_pagination.html' %}
+		</p>
+{% endblock %}	
