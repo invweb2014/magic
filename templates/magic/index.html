@@ -10,6 +10,96 @@
 		{% block css2 %}{% endblock %}
 		{% block css3 %}{% endblock %}
 		
+		
+		<script type='text/javascript' src='/a/static/default/js/jquery-1.11.0.min.js'></script>
+		
+		<script>
+		var MagicNode = {};
+		
+		MagicNode.ajax = function(url, method, data, success_func){
+			var r_obj = $.ajax({
+				url: url,
+				type: method,
+				data: data,
+				dataType: "json",
+				success: success_func
+			});
+		}
+		
+		MagicNode.form_load = function(url, div_id, list_id, msg_id){
+											MagicNode.ajax(url, "GET", {}, function(r_obj){
+													
+													$("#" + div_id).html(r_obj.content);
+													
+													$("#" + div_id + " .submit").click(function(event){
+														MagicNode.std_form_submit(div_id, list_id, msg_id);
+														});
+													
+													$("#" + div_id + " form").click(function(event){
+															event.preventDefault();});
+													
+											});
+								}
+		
+		MagicNode.std_form_submit = function(div_id, list_id, msg_id){
+			url = $("#" + div_id + " form").attr('action');
+			MagicNode.ajax(url, "POST",  $("#" + div_id + " form").serialize(), function(r_obj){
+				alert(r_obj.sub_status);
+				if(r_obj.sub_status && r_obj.sub_status == 'ajax_complete'){
+				    //append result
+					$("#" + list_id).append(r_obj.content).fadeIn(999);
+					MagicNode.form_load(url, div_id, list_id, msg_id);
+				}
+				else{
+												   
+							$("#" + div_id).html(r_obj.content);
+							
+							$("#" + div_id + " .submit").click(function(event){
+								MagicNode.std_form_submit(div_id, list_id, msg_id);
+								});
+							
+							$("#" + div_id + " form").click(function(event){
+									event.preventDefault();});
+				}	
+			});
+		}
+		
+		
+		MagicNode.list_load = function(url, div_id, more_bnt_id, curr_page_id, last_page_id){
+			curr_page = $("#" + curr_page_id).val();
+			curr_page = parseInt(curr_page);
+			
+			url = url + "&page=" + curr_page + "&item_per_page=5";
+			//alert(url);
+			MagicNode.ajax(url, "GET", {}, function(r_obj){
+												$("#" + div_id).append(r_obj.content);
+												//alert(r_obj.part_paging.last_page);
+												btn_id = more_bnt_id + "-btn";
+												last_page = r_obj.part_paging.last_page;
+												//alert(curr_page);
+												if(curr_page < last_page){
+														//alert('show more');
+														$("#" + more_bnt_id).html('<button id="' + btn_id + '">More</button>');
+														$("#more_bnt_id").show();
+														
+														$("#" + btn_id).click(function(event){
+																MagicNode.list_load(url, div_id, more_bnt_id, curr_page_id, last_page_id );
+						
+														});
+														
+														next_page = curr_page + 1;
+														//alert("next page " + next_page);
+														$("#" + curr_page_id).val(next_page);
+														
+												}else{
+														$("#more_bnt_id").hide();
+												}	
+								});
+		}
+		
+		
+		</script>
+
 		{% block js %}{% endblock %}
 		{% block js2 %}{% endblock %}
 		{% block js3 %}{% endblock %}
@@ -22,7 +112,8 @@
 <div class="header">
   <div class="section-wrap">
 	<div class="login_stub">
-      <form action="/login..." method = "POST">
+      <form action="/a/sign_in/" method = "POST">
+         {% csrf_token %}  
 		<table>
 			<tr>
 				<td><input type="email" placeholder="Email" /></td>
@@ -32,8 +123,8 @@
 			</tr>
 			
 			<tr>
-				<td><a href=""><small>Sign Up</small></a></td>
-				<td><a href=""><small>Forgot Password?</small></a></td>				
+				<td><a href="/a/sign_up/"><small>Sign Up</small></a></td>
+				<td><a href="/a/forgot_password/"><small>Forgot Password?</small></a></td>				
 				<td></td>
 			</tr>
 			
@@ -67,6 +158,7 @@
 
 <div class="content">
   <div class="section-wrap">
+  		{% block content-no-col %}
     	<div class="left-col" id="left-col">
 			{% block left-col %}{% endblock %}
 		</div>
@@ -78,6 +170,7 @@
 	    <div class="right-col" id="right-col">
 			{% block side-bar %}{% endblock %}
 		</div>
+		{% endblock %}
   </div>
   <div class="clearboth"></div>
 </div>
@@ -93,11 +186,12 @@
   </div>
 </div>
 
+
+{% block js_layout_height %}
 <script>
 	left_col = document.getElementById("left-col").offsetHeight;
 	right_col = document.getElementById("right-col").offsetHeight;
 	main_col = right_col = document.getElementById("main-col").offsetHeight;
-	
 	
 	max = left_col;
 	if (right_col > max){
@@ -112,6 +206,17 @@
 	document.getElementById('main-col').setAttribute("style","height:" + max + "px");
 	
 </script>
-	
+{% endblock %}
+
+
+{% block js_last %}
+{% endblock %}
+
+{% block js_last2 %}
+{% endblock %}
+
+{% block js_z3 %}
+{% endblock %}
+
 </body>
 </html>

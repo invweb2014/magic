@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 
 class ListDb(Db):
     @staticmethod
-    def get(model, filters, page, item_per_page, sort_by):
+    def get(model, filters, page = 1, item_per_page = 30, sort_by = None):
         page = int(page)
         print "****************************page: %d" % page
         filter_str = ''

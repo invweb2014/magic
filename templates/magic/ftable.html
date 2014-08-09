@@ -5,19 +5,26 @@
 <form name="{{form.tclass}}" action="{{request.get_full_path}}" method="POST" {% if form.fupload %}enctype="multipart/form-data"{%endif %} class="form-shadow">
     <h3>{{form.form_name}}</h3>
     {% csrf_token %}  
+    
+    {% if form.non_field_errors  %}
+    	<div class="error">
+    		{{ form.non_field_errors }} 
+    	</div>
+    {% endif %}
+    
  	<table>
 	    {% for field in form %}
     		<tr>
 				<td><label>{{ field.label_tag|title }}</label></td>	
 	        	<td>{{ field|safe }}</td>
 	        	<td>
-	        		{% if form.is_post %}
+	        		
 				        {% for error in field.errors %}
+				        	
 					        <small class="error">
-								{{ error|escape }}<br/>
+								<img src="/a/static/default/Batch-master/PNG/16x16/asterisk.png" class="action-icon"></img> {{ error|escape }}
 					        </small>
 				        {% endfor %}
-			        {% endif %}
 			    </td>
 			</tr>
 		{% endfor %}
@@ -25,7 +32,7 @@
     	<tr>
 	    	<td></td>
 	    	<td> 
-	    		<input type="submit" value="{{form.tsubmit}}"></input>
+	    		<input type="submit" value="{{form.tsubmit}}" class="submit"></input>
 	    	</td>
 	    	<td>
 	    	</td>

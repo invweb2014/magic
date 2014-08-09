@@ -13,10 +13,51 @@ class List(Node):
     
     tname = "list"    
     tname_form = "..."
-    tsort = ['time_create', 'symbol']
+    tsort = ['id']
     tfilters = []
     titem_per_page = 30
+    
+    uitem = None
 
+    @classmethod 
+    def get_pages(cls, first, last, page, step = 10):
+        print "first %d, last: $%d, page: %d, step: %d" % (first, last, page, step) 
+        if page == 0: 
+            return []
+            
+        seq = []
+        for p in range(page - step, page):
+            if(p > 0):
+                seq.append(p)
+    
+        for p in range(page, page + step):
+            if(p <= last):
+                seq.append(p)
+                
+        print "seq: %s" % str(seq)
+            
+        if last > 2: 
+            if len(seq) > 0 and seq[0] != 1:
+                seq.insert(0, 1)
+            if len(seq) > 2  and seq[1] != 2:
+                seq.insert(1, 2)
+    
+        if last > 3: 
+            if len(seq) >= 2 and seq[-2] != last - 1:
+                seq.append(last - 1 )
+            if len(seq) >= 1 and seq[-1] != last:
+                seq.append(last)
+    
+        if len(seq) > 2 and seq[2] != 3:
+            seq.insert(2, "...")
+        if len(seq) > 2 and seq[-3] != last - 3:
+            seq.insert(len(seq)-2, "...")
+            
+        if len(seq) <= 1:
+            return []
+        
+        return seq
+        
     @classmethod 
     def get_uparam(cls, request, get, post):
         # normalize
@@ -75,8 +116,7 @@ class List(Node):
                 e_list = ListDb.get(cls.model, filters, page, item_per_page, sort_by)
                 e_list['part_tfilters'] = filter_list
                 e_list['part_tfilters_selected'] = filters
-                part_tpages = [x for x in range(1, e_list['part_paging']['last_page']+1)]
-                e_list['part_tpages'] = part_tpages
+                e_list['part_tpages'] = cls.get_pages(1, int(e_list['part_paging']['last_page']), int(page))
                 e_list['part_tsort'] = cls.tsort
                 e_list['part_tsort_selected'] = sort_by
                 e_list['url_prefix'] = url_prefix

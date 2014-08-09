@@ -1,0 +1,29 @@
+{%  extends parent_template %}
+
+{% block content-no-col %}		
+		<p>
+			{{e}}
+		</p>	
+		
+		<div id="comment-form"></div>
+		<div id="comment-list"></div>
+		<div id="comment-more"></div>
+		<input type="text" id="comment-last-page" value="1"></input>		
+		<input type="texst" id="comment-curr-page" value="1"></input>
+			
+		
+{% endblock %}	
+
+
+{% block js_layout_height %}
+{% endblock %}	
+
+
+{% block js_z3 %}	
+		{% if cls.flag_comment %}
+				<script>
+						MagicNode.list_load("/a/comment-list/?ref_id={{e.id}}&ref_obj={{cls.uname}}", "comment-list", "comment-more", "comment-curr-page", "comment-last-page" );
+						MagicNode.form_load("/a/comment/?ref_id={{e.id}}&ref_obj={{cls.uname}}", "comment-form", "comment-list");
+				</script>
+		{% endif %}
+{% endblock %}

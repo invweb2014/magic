@@ -1,7 +1,15 @@
 <div class="pagination">
 	{% for n in  part_tpages %}
-		<a href="{{url_prefix}}&page_rr={{n}}">
-			{{n}}
-		</a>
+			<span class="page{% if n == part_paging.page %} selected {% endif%}">
+			{% if n == "..." %}
+					{{n}}
+			{% else %}
+				
+				<a href="{{url_prefix}}&page_rr={{n}}" }>
+					{{n}}
+				</a>
+			{% endif %}
+			</span>
 	{% endfor %}
+	
 </div>			

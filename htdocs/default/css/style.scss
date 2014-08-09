@@ -270,7 +270,13 @@ ul.filter a.selected{
 
 .list-part-page-info,
 .list-part-sort{
-	font-size: 0.9em;		
+	font-size: 0.9em;	
+	color: #aaa;	
+}
+
+.list-part-sort select{
+	font-size: 0.9em;	
+	color: #aaa;	
 }
 
 .list-part-filter-selected{
@@ -283,7 +289,14 @@ ul.filter a.selected{
 	padding: 5px; 
 	margin-top: 15px;
 	margin-right: 15px;
-	background-color: #eee;
+	box-shadow: 0 0 2px 1px #bbb;
+	background-color: #f0f0f0;
+	font-size: 0.9em;
+	color: #999;
+}
+
+.selected-filter a{
+	color: #999;
 }
 
 .list-part-list{
@@ -322,4 +335,20 @@ a.action-icon:hover{
 
 img.action-icon{
 	vertical-align:middle;
+}
+
+.error{
+	color: red;
+}
+
+.page{
+	display: inline-block;
+	margin-right: 3px;
+	border: solid #eee 1px;
+	padding: 3px;
+	font-size: 0.9em;
+}
+
+.page.selected{
+	background-color: #eee;
 }

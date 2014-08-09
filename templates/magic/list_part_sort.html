@@ -1,9 +1,16 @@
 Sort by: 
+
+<select>
 {% for s in part_tsort %}
+	
 		{% ifequal part_tsort_selected s %}
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s|capfirst}}</a> 
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr=-{{s}}" class="selected">-{{s|capfirst}}</a> 
+			<option selected="selected" value="#">
+				<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s|capfirst}}</a> 
+			</option>
 		{% else %}
-			<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" class="selected">{{s|capfirst}}</a> 
+			<option value="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}">
+				<a href="{{url_prefix}}&page_rr={{1}}&sort_rr={{s}}" >{{s|capfirst}}</a> 
+			</option>
 		{% endifequal %}
 {% endfor %}
+</select>

@@ -32,6 +32,7 @@ class BForm(Node):
     tclass = "my-form"
     
     @classmethod
+    @has_perm(['dummy',])
     def run(cls, request, get, post, args={}):
         '''argument: cls, request
            return: result dict
@@ -44,17 +45,17 @@ class BForm(Node):
                 form = cls()
             return {'form':form, 'response':'html'}
         elif request.method == 'POST':
-            if cls.model:
+            if cls.model and request.GET.get('id'):
                 e = ItemDb.get(cls.model, {'id':request.GET.get('id')});
                 form = cls(request.POST, request.FILES, instance=e)
             else:
                 form = cls(request.POST)
             if form.is_valid(): 
                 return form.process(request)
-            return {'form':form, 'response':'html'}
+            return {'form':form}
 
     def process(self, request):
         self.save()
-        result = {'response':'redirect', 'content':'/'}
+        result = {'response':'redirect', 'content':'/', 'substatus':'processed'}
         return result
         
