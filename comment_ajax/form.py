@@ -31,10 +31,9 @@ from django.template import Context, Template
 
 class CommentForm(MForm):
     parent_template = "magic/index_no_col.html"
+    item_ajax_template = "magic/comment_item_ajax.html"    
     model = Comment
 
-    parent_template = "magic/index_no_col.html"
-    
     class Meta:
         pass
         model = Comment
@@ -45,32 +44,9 @@ class CommentForm(MForm):
         self.instance.ref_id = request.GET.get('ref_id')
         self.instance.ref_obj = request.GET.get('ref_obj')
         self.instance.save()
-        result = {'content':'',  'sub_status':'ajax_complete', 'form':self}
+        json = {}
+        json_dict = {'substatus':'processed'}
+        result = {'json':json_dict, 'comment':self.instance, 'template_rr':self.item_ajax_template}
         return result
 
-        
-    @classmethod
-    def render(cls, request, get, post, args, result):
-            if result.get('sub_status') == 'ajax_complete':
-                    
-                    s = '''
-                            <div class="comment">
-                                Comment <div class="c">{{c.comment}}</div>
-                            </div>
-                    '''
-                    t = Template(s)
-                    c = Context({'c': result['form'].instance})
-                    html = t.render(c)
-                    json_dict = {'content':html, 'sub_status':'ajax_complete'} #{'item_html':html, 'sub_status':'ajax_complete'},
-                    return HttpResponse(json.dumps(json_dict), content_type="application/json")
-            result['request'] = request
-            result['cls'] = cls
-            result['parent_template'] = cls.empty_template
-            template_loader = loader.get_template(cls.template)
-            context_instance = RequestContext(request)
-            context_instance.update(Context(result))
-            html = template_loader.render(context_instance)
-            
-            json_dict = {'content':html}
-            return HttpResponse(json.dumps(json_dict), content_type="application/json")
     

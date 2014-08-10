@@ -29,32 +29,32 @@ class Node(object):
     def render(cls, request, get, post, args, result):
         result['cls'] = cls
         result['request'] = request
-        
-        # get response type
+        if result.get('response') == 'redirect':
+            return Redirect.redirect(request, result['content'])
         if request.is_ajax():
-            response = "ajax"
+            return cls.render_ajax(request, get, post, args, result)
         else:
-            response = "html"
-            
-        print "**********************************************is ajax: %s" % str(request.is_ajax())
-        print "**********************************************response: %s" % str(response)
-        
-        if response == 'html':
             result['parent_template'] = cls.parent_template
             return render_to_response(cls.template, result, context_instance=RequestContext(request),)
-        elif response == 'ajax':
-            result['parent_template'] = cls.empty_template
-            template_loader = loader.get_template(cls.template)
-            context_instance = RequestContext(request)
-            context_instance.update(Context(result))
-            html = template_loader.render(context_instance)  
-            result = {}
-            result['content'] = html
-            return HttpResponse(json.dumps(result), content_type="application/json")
-        elif response == 'redirect':
-            return Redirect.redirect(request, result['content'])
+
     
-           
+    @classmethod
+    def render_ajax(cls, request, get, post, args, result):
+        result['request'] = request
+        result['cls'] = cls
+        
+        template_name = result.get('template_rr', cls.ajax_template)
+        
+        print "-------------------> template_name: %s"  % template_name 
+        result['parent_template'] = cls.empty_template
+        template_loader = loader.get_template(template_name)
+        context_instance = RequestContext(request)
+        context_instance.update(Context(result))
+        html = template_loader.render(context_instance)
+        
+        json_dict = result.get('json', {})
+        json_dict['content'] = html
+        return HttpResponse(json.dumps(json_dict), content_type="application/json")        
         
         
         

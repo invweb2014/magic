@@ -14,19 +14,8 @@ from magic.models import Comment
 
 class CommentList(List):
     model = Comment
-    template = 'magic/list_ajax.html'
+    ajax_template = 'magic/list_ajax.html'
     
-    @classmethod
-    def render(cls, request, get, post, args, result):
-            result['request'] = request
-            result['cls'] = cls
-            result['parent_template'] = cls.empty_template
-            template_loader = loader.get_template(cls.template)
-            context_instance = RequestContext(request)
-            context_instance.update(Context(result))
-            html = template_loader.render(context_instance)
-            
-            json_dict = {'content':html, 'part_paging':result['part_paging']}
-            return HttpResponse(json.dumps(json_dict), content_type="application/json")
+
     
         

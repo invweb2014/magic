@@ -10,7 +10,6 @@
 		{% block css2 %}{% endblock %}
 		{% block css3 %}{% endblock %}
 		
-		
 		<script type='text/javascript' src='/a/static/default/js/jquery-1.11.0.min.js'></script>
 		
 		<script>
@@ -22,44 +21,38 @@
 				type: method,
 				data: data,
 				dataType: "json",
-				success: success_func
-			});
+				success: success_func});
 		}
 		
 		MagicNode.form_load = function(url, div_id, list_id, msg_id){
-											MagicNode.ajax(url, "GET", {}, function(r_obj){
-													
-													$("#" + div_id).html(r_obj.content);
-													
-													$("#" + div_id + " .submit").click(function(event){
-														MagicNode.std_form_submit(div_id, list_id, msg_id);
-														});
-													
-													$("#" + div_id + " form").click(function(event){
-															event.preventDefault();});
-													
-											});
-								}
+			MagicNode.ajax(url, "GET", {}, function(r_obj){
+					$("#" + div_id).html(r_obj.content);
+					
+					$("#" + div_id + " .submit").click(function(event){
+						MagicNode.std_form_submit(div_id, list_id, msg_id);
+						});
+					
+					$("#" + div_id + " form").click(function(event){
+							event.preventDefault();});
+			});
+		}
 		
 		MagicNode.std_form_submit = function(div_id, list_id, msg_id){
 			url = $("#" + div_id + " form").attr('action');
 			MagicNode.ajax(url, "POST",  $("#" + div_id + " form").serialize(), function(r_obj){
-				alert(r_obj.sub_status);
-				if(r_obj.sub_status && r_obj.sub_status == 'ajax_complete'){
-				    //append result
+				if(r_obj.substatus && r_obj.substatus == 'processed'){
 					$("#" + list_id).append(r_obj.content).fadeIn(999);
 					MagicNode.form_load(url, div_id, list_id, msg_id);
 				}
-				else{
-												   
-							$("#" + div_id).html(r_obj.content);
-							
-							$("#" + div_id + " .submit").click(function(event){
-								MagicNode.std_form_submit(div_id, list_id, msg_id);
-								});
-							
-							$("#" + div_id + " form").click(function(event){
-									event.preventDefault();});
+				else{						   
+					$("#" + div_id).html(r_obj.content);
+					
+					$("#" + div_id + " .submit").click(function(event){
+						MagicNode.std_form_submit(div_id, list_id, msg_id);
+						});
+					
+					$("#" + div_id + " form").click(function(event){
+							event.preventDefault();});
 				}	
 			});
 		}
@@ -70,13 +63,11 @@
 			curr_page = parseInt(curr_page);
 			
 			url = url + "&page=" + curr_page + "&item_per_page=5";
-			//alert(url);
 			MagicNode.ajax(url, "GET", {}, function(r_obj){
 												$("#" + div_id).append(r_obj.content);
-												//alert(r_obj.part_paging.last_page);
+												
 												btn_id = more_bnt_id + "-btn";
 												last_page = r_obj.part_paging.last_page;
-												//alert(curr_page);
 												if(curr_page < last_page){
 														//alert('show more');
 														$("#" + more_bnt_id).html('<button id="' + btn_id + '">More</button>');
@@ -92,7 +83,7 @@
 														$("#" + curr_page_id).val(next_page);
 														
 												}else{
-														$("#more_bnt_id").hide();
+														$("#" + btn_id).hide();
 												}	
 								});
 		}
@@ -111,64 +102,291 @@
 
 <div class="header">
   <div class="section-wrap">
-	<div class="login_stub">
-      <form action="/a/sign_in/" method = "POST">
-         {% csrf_token %}  
-		<table>
-			<tr>
-				<td><input type="email" placeholder="Email" /></td>
-				<td><input type="password" placeholder="Password"/></td>
-				<td><input type="submit" value="Login" class="pure-button"/></td>
-				
-			</tr>
-			
-			<tr>
-				<td><a href="/a/sign_up/"><small>Sign Up</small></a></td>
-				<td><a href="/a/forgot_password/"><small>Forgot Password?</small></a></td>				
-				<td></td>
-			</tr>
-			
-			<tr>
-			</tr>
-		</table>
-      </form>
-    </div>
-    <p class="logo"></p>
+	
+    <p class="logo"><img src="/a/static/default/img/logo.png"></img></p>
     <div class="clearboth"></div>
   </div>
 </div>
 
-<div class="header-nav">
-  <div class="section-wrap">
-    	{% block nav %}{% endblock %}
-  </div>
-</div>
-
-<div class="msg">
-	{% block msg %}
-		{% if messages %}
-		<ul class="msg">
-				{% for m in messages %}
-					{{m}}
-				{% endfor %}
-		</ul>
-		{% endif %}
-	{% endblock %}
-</div>
 
 <div class="content">
   <div class="section-wrap">
   		{% block content-no-col %}
+  		
+  		<div class="msg">
+			{% block msg %}
+				{% if messages %}
+				<ul class="msg">
+						{% for m in messages %}
+							{{m}}
+						{% endfor %}
+				</ul>
+				{% endif %}
+			{% endblock %}
+		</div>
+
     	<div class="left-col" id="left-col">
-			{% block left-col %}{% endblock %}
+			{% block left-col %}
+			
+			<h3 class="list-heading news">News</h3>
+			<ul>
+				<li><a herf="">Merge</a></li>
+				<li><a herf="">Rumor</a></li>
+				<li><a herf="">IPO</a></li>
+				<li><a herf="">Earning Report</a></li>
+				<li><a herf="">New Product</a></li>
+				<li><a herf="">Drug Approval</a></li>
+				<li><a herf="">Executives Changes</a></li>
+				<li><a herf="">Moving Average</a></li>
+				<li><a herf="">MACD</a></li>
+				<li><a herf="">Candlestick</a></li>
+				<li><a herf="">Abnormal Volume</a></li>
+				<li><a herf="">Support</a></li>
+				<li><a herf="">Resitance</a></li>
+			</ul>
+			
+			
+			<h3 class="list-heading edu">Education</h3>
+			<ul>
+				<li><a herf="">IPO</a></li>
+				<li><a herf="">Balance Sheet</a></li>
+				<li><a herf="">Order Type</a></li>
+			</ul>
+			{% endblock %}
+			
+			
 		</div>
 		
 		<div class="main-col" id="main-col">
-			{% block content %}Magic Index{% endblock %}
+			{% block content %}
+			
+			<h3>Today's Investing Ideas</h3>
+			<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+			<div class="box-story bearish">
+				<div class="i">
+					<div class="symbol"><a href="">MSFT</a></div>
+					<div class="company">Microsoft</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Microsoft (MSFT) is down to $20</a></div>
+					<div class="m">
+							Stock price is down $10 when CEO steve is leaving the company.
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+					
+			<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+			
+			<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+						<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+			<div class="box-story bearish">
+				<div class="i">
+					<div class="symbol"><a href="">MSFT</a></div>
+					<div class="company">Microsoft</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Microsoft (MSFT) is down to $20</a></div>
+					<div class="m">
+							Stock price is down $10 when CEO steve is leaving the company.
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+					
+			<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+			
+			<div class="box-story bullish">
+				<div class="i">
+					<div class="symbol"><a href="">AAPL</a></div>
+					<div class="company">Apple Computer</div>
+				</div>
+				
+				<div class="c">
+					<div class="t"><a href="">Apple (AAPL) is soaring to $200</a></div>
+					<div class="m">
+							Stock price is up 15% with trading volume 5 times the average.
+							
+					</div>
+				</div>
+				
+				<div class="stub">
+					<span class="time b">Posted 5 minutes ago</span>
+					<span class="views b">115 Views</span>
+					<span class="ccount b"><a href="">8 Comments</a></span>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			{% endblock %}
 		</div>
 	    
 	    <div class="right-col" id="right-col">
-			{% block side-bar %}{% endblock %}
+			{% block side-bar %}
+			
+			<div class="f-box">
+				<h3>What we do? </h3>
+				<p><img src="/a/static/default/img/announcement-icon.png"></img>Give you top investing ideas, daily.</p>
+				<p><img src="/a/static/default/img/student-icon.png"></img>Help everyone understand the market. </p>
+				<p><img src="/a/static/default/img/analytics-icon.png"></img>Research what works.</p>
+			</div>
+			
+			<div class="f-box q">
+				<h3> Question: What's the largest stock exchange in the world, in terms of market capitalization?</h3>
+				<p>
+					<form>
+						<ul>
+							<li>
+								<input type="checkbox" /></input> New York Stock Exchange 
+							</li>
+							<li>
+								<input type="checkbox" /></input> New York Stock Exchange 
+							</li>
+							<li>
+								 <input type="checkbox" /></input> Tokyo Stock Exchange 
+							</li>
+							<li>
+								<input type="checkbox" /></input> New York Stock Exchange 
+							</li>
+						</ul>
+						<input type="submit" value="See Answer"></input>
+					</form>
+					
+				</p>
+				
+			</div>
+			
+			<div class="f-box">
+				<h3>Sign up for our daily newslettter: </h3>
+				<p> get daily stock alerts</p>
+				<p> plus stock education </p>
+				
+				<form>
+						<label>E-mail: </label></label>
+						<input type="submit" value="Send"></input>
+				</form>
+					
+			</div>
+			
+			{% endblock %}
 		</div>
 		{% endblock %}
   </div>
@@ -178,6 +396,22 @@
 <div class="footer">
   <div class="section-wrap">
   		{% block footer %}
+  		
+  		<script>
+  (function() {
+    var cx = '016691929047513264442:pg1x9o6dbsu';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
 		<ul class="inline">
 			<li><a href="">Privacy</a></li>
 			<li><a href="">About</a></li>

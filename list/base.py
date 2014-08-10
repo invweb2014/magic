@@ -1,3 +1,14 @@
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.utils import simplejson
+from django.contrib import messages
+from django.template import loader, Context
+import json
+from django.http import HttpResponse
+from magic.security.has_perm import has_perm
+from magic.redirect.base import Redirect
+
 import copy
 from magic.node.base import Node
 from magic.db.list import ListDb
@@ -120,6 +131,7 @@ class List(Node):
                 e_list['part_tsort'] = cls.tsort
                 e_list['part_tsort_selected'] = sort_by
                 e_list['url_prefix'] = url_prefix
+                e_list['json'] = {'part_paging':e_list['part_paging']}
                 return e_list
         else:
                 return {'error':'...'}

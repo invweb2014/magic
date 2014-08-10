@@ -5,6 +5,36 @@ from django.utils import simplejson
 from django.contrib import messages
 from django.template import loader, Context
 from django.forms import ModelForm
+
+from magic.msg.base import Msg
+from django import forms
+
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.utils import simplejson
+from django.contrib import messages
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.utils import simplejson
+from django.contrib import messages
+from django.template import loader, Context
+import json
+from django.http import HttpResponse
+from magic.security.has_perm import has_perm
+from magic.redirect.base import Redirect
+
+from magic.db.list import ListDb
+from magic.models import Comment
+from django import forms
+from django.template import Context, Template
+
 from magic.security.has_perm import has_perm
 from magic.node.base import Node
 from magic.db.item import ItemDb
@@ -23,6 +53,8 @@ class BForm(Node):
     model = None
     template = "magic/ftable.html"
     parent_template = "magic/index.html"
+    ajax_template = "magic/ftable.html"
+    
     perm_list = []
     fownership = False
     fupload = False
@@ -58,4 +90,5 @@ class BForm(Node):
         self.save()
         result = {'response':'redirect', 'content':'/', 'substatus':'processed'}
         return result
+    
         
