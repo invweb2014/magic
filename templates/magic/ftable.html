@@ -1,9 +1,9 @@
 {%  extends parent_template %}
 
-{% block content %}
+{% block content-all %}
 
 <form name="{{form.tclass}}" action="{{request.get_full_path}}" method="POST" {% if form.fupload %}enctype="multipart/form-data"{%endif %} class="form-shadow">
-    <h3>{{form.form_name}}</h3>
+    <h3>{{form.name}}</h3>
     {% csrf_token %}  
     
     {% if form.non_field_errors  %}
@@ -37,6 +37,17 @@
 	    	<td>
 	    	</td>
 	    </tr>
+	    
+	    {% if form.tz_html %}
+	    <tr>
+	    	<td></td>
+	    	<td> 
+	    		{{form.tz_html|safe}}
+	    	</td>
+	    	<td>
+	    	</td>
+	    </tr>
+	    {% endif %}
     </table>
 </form>
 

@@ -9,11 +9,13 @@ from django.http import HttpResponse
 from magic.security.has_perm import has_perm
 from magic.redirect.base import Redirect
 
+import settings
+
 class Node(object):
     model = None
-    template = "magic/index.html"
+    template = None
     empty_template = "magic/empty.html"
-    parent_template = None
+    parent_template = settings.MAGIC_INDEX_TEMPLATE
      
     perm_list = []
 

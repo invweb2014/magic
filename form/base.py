@@ -39,6 +39,8 @@ from magic.security.has_perm import has_perm
 from magic.node.base import Node
 from magic.db.item import ItemDb
 
+import settings
+
 '''
     MEDIA_URL = '/xapp-htdocs/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'deals_htdocs')
@@ -51,8 +53,12 @@ from magic.db.item import ItemDb
 
 class BForm(Node):
     model = None
+
+    name = "<Form Name>"
     template = "magic/ftable.html"
-    parent_template = "magic/index.html"
+    empty_template = "magic/empty.html"
+    parent_template = settings.MAGIC_INDEX_TEMPLATE
+    
     ajax_template = "magic/ftable.html"
     
     perm_list = []
@@ -62,6 +68,7 @@ class BForm(Node):
     tname = "My Form"
     tsubmit = "Submit"
     tclass = "my-form"
+    tz_html = None
     
     @classmethod
     @has_perm(['dummy',])
@@ -90,5 +97,6 @@ class BForm(Node):
         self.save()
         result = {'response':'redirect', 'content':'/', 'substatus':'processed'}
         return result
-    
+ 
+   
         
